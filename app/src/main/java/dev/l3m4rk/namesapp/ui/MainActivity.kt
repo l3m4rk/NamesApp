@@ -1,8 +1,9 @@
-package dev.l3m4rk.namesapp
+package dev.l3m4rk.namesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
+import dev.l3m4rk.namesapp.R
 import dev.l3m4rk.namesapp.ui.main.MainFragment
 
 @AndroidEntryPoint
