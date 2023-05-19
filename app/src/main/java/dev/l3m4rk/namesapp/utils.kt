@@ -8,6 +8,8 @@ fun getFakePersonItems(amount: Int = 30): List<PersonItem> =
         PersonItem(
             id = index,
             name = "Name #$index",
-            age = Random.nextInt(1, 100)
+            age = computeAge()
         )
     }
+
+internal fun computeAge() = Random.nextInt(1, 100)

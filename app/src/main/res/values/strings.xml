@@ -3,7 +3,7 @@
     <string name="main_screen_name_input_hint">Name</string>
     <string name="main_screen_add_name_button">Add name</string>
     <string name="main_screen_clear_names_button">Clear names</string>
-    <string name="main_screen_empty_names_text">There is no names here\n you can create one =]</string>
+    <string name="main_screen_empty_names_text">There is no names here\n you may add one =]</string>
 
     <plurals name="person_age">
         <item quantity="one">%d year</item>
