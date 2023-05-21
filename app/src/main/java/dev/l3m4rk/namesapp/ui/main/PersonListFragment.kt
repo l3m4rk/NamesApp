@@ -13,14 +13,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import dev.l3m4rk.namesapp.databinding.FragmentMainBinding
+import dev.l3m4rk.namesapp.databinding.FragmentPersonListBinding
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class PersonListFragment : Fragment() {
 
-    private var _ui: FragmentMainBinding? = null
+    private var _ui: FragmentPersonListBinding? = null
     private val ui get() = _ui!!
 
     @Inject
@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        _ui = FragmentMainBinding.inflate(inflater, container, false)
+        _ui = FragmentPersonListBinding.inflate(inflater, container, false)
         return ui.root
     }
 
