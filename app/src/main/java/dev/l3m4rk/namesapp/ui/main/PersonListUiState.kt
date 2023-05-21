@@ -6,6 +6,5 @@ data class PersonListUiState(
     val shouldClearInput: Boolean = false
 ) {
     val showEmptyView: Boolean = personItems.isEmpty()
-    val showPersonList: Boolean = personItems.isNotEmpty()
     val clearNamesEnabled: Boolean = personItems.isNotEmpty()
 }

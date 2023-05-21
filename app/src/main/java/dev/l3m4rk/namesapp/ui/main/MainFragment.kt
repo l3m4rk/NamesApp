@@ -40,7 +40,6 @@ class MainFragment : Fragment() {
 
     private fun handleState(uiState: PersonListUiState) {
         ui.emptyStateView.isVisible = uiState.showEmptyView
-        ui.namesList.isVisible = uiState.showPersonList
         ui.clearNamesButton.isEnabled = uiState.clearNamesEnabled
         ui.addNameButton.isEnabled = uiState.addNameEnabled
         adapter.submitList(uiState.personItems)
