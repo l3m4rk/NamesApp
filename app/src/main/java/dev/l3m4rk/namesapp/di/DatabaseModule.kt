@@ -11,6 +11,7 @@ import dev.l3m4rk.namesapp.data.PersonsRepository
 import dev.l3m4rk.namesapp.data.PersonsRepositoryImpl
 import dev.l3m4rk.namesapp.data.source.local.PersonDao
 import dev.l3m4rk.namesapp.data.source.local.PersonDatabase
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Suppress("unused")
@@ -34,7 +35,10 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideRepository(dao: PersonDao): PersonsRepository {
-        return PersonsRepositoryImpl(dao)
+    fun provideRepository(
+        dao: PersonDao,
+        @IoDispatcher dispatcher: CoroutineDispatcher
+    ): PersonsRepository {
+        return PersonsRepositoryImpl(dao, dispatcher)
     }
 }

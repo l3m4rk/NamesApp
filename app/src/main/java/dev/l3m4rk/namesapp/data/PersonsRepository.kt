@@ -3,8 +3,11 @@ package dev.l3m4rk.namesapp.data
 import dev.l3m4rk.namesapp.data.source.local.LocalPerson
 import dev.l3m4rk.namesapp.data.source.local.PersonDao
 import dev.l3m4rk.namesapp.data.source.local.toPerson
+import dev.l3m4rk.namesapp.di.IoDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface PersonsRepository {
@@ -17,7 +20,8 @@ interface PersonsRepository {
 }
 
 class PersonsRepositoryImpl @Inject constructor(
-    private val localDataSource: PersonDao
+    private val localDataSource: PersonDao,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ): PersonsRepository {
 
     override val persons: Flow<List<Person>>
@@ -25,12 +29,15 @@ class PersonsRepositoryImpl @Inject constructor(
 
     override suspend fun addPerson(name: String, age: Int) {
         val person = LocalPerson(name, age)
-        localDataSource.add(person)
+        withContext(dispatcher) {
+            localDataSource.add(person)
+        }
     }
 
     override suspend fun deleteAllPersons() {
-        localDataSource.deleteAll()
+        withContext(dispatcher) {
+            localDataSource.deleteAll()
+        }
     }
-
 }
 
