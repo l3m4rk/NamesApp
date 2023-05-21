@@ -10,6 +10,7 @@ import dev.l3m4rk.namesapp.data.Person
 data class LocalPerson(
     val name: String,
     val age: Int,
+    val createdAt: Long = System.currentTimeMillis(),
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
 )
 
