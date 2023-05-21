@@ -6,8 +6,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.l3m4rk.namesapp.computeAge
 import dev.l3m4rk.namesapp.data.PersonsRepository
+import dev.l3m4rk.namesapp.domain.ComputeRandomAgeUseCase
+import dev.l3m4rk.namesapp.domain.GetPersonsUseCase
+import dev.l3m4rk.namesapp.domain.SanitizeInputUseCase
+import dev.l3m4rk.namesapp.domain.ValidateNameInputUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,19 +25,21 @@ import javax.inject.Inject
 class PersonListViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val repository: PersonsRepository,
+    private val computeRandomAge: ComputeRandomAgeUseCase,
+    private val sanitizeInput: SanitizeInputUseCase,
+    getPersons: GetPersonsUseCase,
+    validateNameInput: ValidateNameInputUseCase,
 ) : ViewModel() {
 
     private val _name = MutableStateFlow("")
     private val _clearInput = MutableStateFlow(false)
-    private val _persons = repository.persons
-        .mapLatest { it.map(PersonItem.Companion::fromPerson) }
 
     private val addNameButtonEnabled = _name.mapLatest { name ->
-        name.isNotEmpty()
+        validateNameInput(name)
     }
 
     val uiState =
-        combine(_persons, addNameButtonEnabled, _clearInput) { persons, enableAddButton, clearInput ->
+        combine(getPersons(), addNameButtonEnabled, _clearInput) { persons, enableAddButton, clearInput ->
             PersonListUiState(
                 personItems = persons,
                 addNameEnabled = enableAddButton,
@@ -47,9 +52,8 @@ class PersonListViewModel @Inject constructor(
         )
 
     fun onNameChange(name: String) {
-        // TODO: trim
         _clearInput.value = false
-        _name.update { name.trim() }
+        _name.update { sanitizeInput(name) }
     }
 
     fun addName() {
@@ -57,7 +61,7 @@ class PersonListViewModel @Inject constructor(
         _clearInput.value = true
 
         viewModelScope.launch {
-            repository.addPerson(name, computeAge())
+            repository.addPerson(name, computeRandomAge())
         }
     }
 

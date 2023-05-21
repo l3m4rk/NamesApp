@@ -12,4 +12,4 @@ fun getFakePersonItems(amount: Int = 30): List<PersonItem> =
         )
     }
 
-internal fun computeAge() = Random.nextInt(1, 100)
+fun computeAge() = Random.nextInt(0, 100)

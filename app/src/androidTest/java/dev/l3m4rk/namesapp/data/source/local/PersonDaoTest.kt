@@ -7,7 +7,6 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import dev.l3m4rk.namesapp.computeAge
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -16,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import kotlin.random.Random
 
 @RunWith(AndroidJUnit4::class)
 class PersonDaoTest {
@@ -79,6 +79,8 @@ class PersonDaoTest {
     }
 
     private fun getFakePeople() = List(4) { LocalPerson(name = "Name $it", age = computeAge()) }
+
+    private fun computeAge() = Random.nextInt(0, 100)
 
     @Throws(IOException::class)
     @After
