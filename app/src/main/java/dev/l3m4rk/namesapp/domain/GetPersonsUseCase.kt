@@ -3,7 +3,7 @@
 package dev.l3m4rk.namesapp.domain
 
 import dev.l3m4rk.namesapp.data.PersonsRepository
-import dev.l3m4rk.namesapp.ui.main.PersonItem
+import dev.l3m4rk.namesapp.ui.persons.PersonItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest

@@ -1,4 +1,4 @@
-package dev.l3m4rk.namesapp.ui.main
+package dev.l3m4rk.namesapp.ui.persons
 
 import dev.l3m4rk.namesapp.data.Person
 

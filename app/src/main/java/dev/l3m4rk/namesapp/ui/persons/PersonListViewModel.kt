@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalCoroutinesApi::class)
 
-package dev.l3m4rk.namesapp.ui.main
+package dev.l3m4rk.namesapp.ui.persons
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import dev.l3m4rk.namesapp.R
-import dev.l3m4rk.namesapp.ui.main.PersonListFragment
+import dev.l3m4rk.namesapp.ui.persons.PersonListFragment
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
