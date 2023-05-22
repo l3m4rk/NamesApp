@@ -4,7 +4,7 @@ Simple app which generates person with entered name and random age.
 Created person is stored in local database.
 You can clear all the users or add a new one.
 
-## Tech stack
+## Technologies
 
 - Kotlin
 - Coroutines + Flow
@@ -12,3 +12,11 @@ You can clear all the users or add a new one.
 - Jetpack Room 
 - Hilt for DI
 - Clean Architecture
+
+## Things to improve
+
+Here is the list of things which could be improved in the future.
+
+- Add unit tests for UseCases and ViewModel
+- Improve UX
+- Split project into different modules
