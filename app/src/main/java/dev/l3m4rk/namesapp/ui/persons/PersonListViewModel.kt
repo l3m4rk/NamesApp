@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.l3m4rk.namesapp.data.PersonsRepository
-import dev.l3m4rk.namesapp.domain.ComputeRandomAgeUseCase
+import dev.l3m4rk.namesapp.domain.AddPersonUseCase
+import dev.l3m4rk.namesapp.domain.DeleteAllPersonsUseCase
 import dev.l3m4rk.namesapp.domain.GetPersonsUseCase
 import dev.l3m4rk.namesapp.domain.SanitizeInputUseCase
 import dev.l3m4rk.namesapp.domain.ValidateNameInputUseCase
@@ -24,8 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PersonListViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val repository: PersonsRepository,
-    private val computeRandomAge: ComputeRandomAgeUseCase,
+    private val addPerson: AddPersonUseCase,
+    private val deleteAllPersons: DeleteAllPersonsUseCase,
     private val sanitizeInput: SanitizeInputUseCase,
     getPersons: GetPersonsUseCase,
     validateNameInput: ValidateNameInputUseCase,
@@ -61,13 +61,13 @@ class PersonListViewModel @Inject constructor(
         _clearInput.value = true
 
         viewModelScope.launch {
-            repository.addPerson(name, computeRandomAge())
+            addPerson(name)
         }
     }
 
     fun clearNames() {
         viewModelScope.launch {
-            repository.deleteAllPersons()
+            deleteAllPersons()
         }
     }
 }
