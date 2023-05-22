@@ -17,7 +17,9 @@ import javax.inject.Singleton
 @Suppress("unused")
 @InstallIn(SingletonComponent::class)
 @Module
-object DatabaseModule {
+object DataModule {
+
+    private const val DB_NAME = "Persons.db"
 
     @Singleton
     @Provides
@@ -25,7 +27,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             PersonDatabase::class.java,
-            "Persons.db"
+            DB_NAME
         ).build()
     }
 
@@ -34,6 +36,7 @@ object DatabaseModule {
         return database.personDao()
     }
 
+    @Singleton
     @Provides
     fun provideRepository(
         dao: PersonDao,
